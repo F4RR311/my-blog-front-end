@@ -44,7 +44,7 @@ export const Login = () => {
           label="E-Mail"
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
-          {...register("email", { required: "ykajite po4ty" })}
+          {...register("email", { required: "укажите почту" })}
           fullWidth
         />
         <TextField
@@ -53,7 +53,7 @@ export const Login = () => {
           fullWidth
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
-          {...register("password", { required: "ykajite paroJHIb" })}
+          {...register("password", { required: "укажите пароль" })}
         />
         <Button type="submit" size="large" variant="contained" fullWidth>
           Войти
