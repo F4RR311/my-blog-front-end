@@ -59,6 +59,28 @@ export const Login = () => {
           Войти
         </Button>
       </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          className={styles.field}
+          type="email"
+          label="E-Mail"
+          error={Boolean(errors.email?.message)}
+          helperText={errors.email?.message}
+          {...register("email", { required: "укажите почту" })}
+          fullWidth
+        />
+        <TextField
+          className={styles.field}
+          label="Пароль"
+          fullWidth
+          error={Boolean(errors.password?.message)}
+          helperText={errors.password?.message}
+          {...register("password", { required: "укажите пароль" })}
+        />
+        <Button type="submit" size="large" variant="contained" fullWidth>
+          Войти
+        </Button>
+      </form>
     </Paper>
   );
 };
