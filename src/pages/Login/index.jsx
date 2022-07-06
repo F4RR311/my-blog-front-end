@@ -25,8 +25,14 @@ export const Login = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (values) => {
-    dispatch(fetchAuth(values));
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchAuth(values));
+    if (!data.payload) {
+      return alert("Error");
+    }
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
+    }
   };
 
   if (isAuth) {
@@ -37,28 +43,6 @@ export const Login = () => {
       <Typography classes={{ root: styles.title }} variant="h5">
         Вход в аккаунт
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          className={styles.field}
-          type="email"
-          label="E-Mail"
-          error={Boolean(errors.email?.message)}
-          helperText={errors.email?.message}
-          {...register("email", { required: "укажите почту" })}
-          fullWidth
-        />
-        <TextField
-          className={styles.field}
-          label="Пароль"
-          fullWidth
-          error={Boolean(errors.password?.message)}
-          helperText={errors.password?.message}
-          {...register("password", { required: "укажите пароль" })}
-        />
-        <Button type="submit" size="large" variant="contained" fullWidth>
-          Войти
-        </Button>
-      </form>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           className={styles.field}
